@@ -1,0 +1,10 @@
+{
+    "require": {
+        "slim/slim": "4.*",
+        "slim/psr7": "^1.6",
+        "slim/psr7-factory": "^1.0",
+        "slim/psr7-stream": "^1.0",
+        "selective/basepath": "^2.2"
+    }
+}
+

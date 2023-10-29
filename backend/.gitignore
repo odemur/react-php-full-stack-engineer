@@ -1,4 +1,6 @@
-package-lock.json
+/data
+/vendor
 
+composer.lock
 .DS_Store
 ,vscode 

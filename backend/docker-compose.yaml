@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  server:
+    image: 'nginx:stable-alpine'
+    ports:
+      - '80:80'
+    volumes:
+      - ./:/var/www/html
+      - ./docker-config/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - php
+      - mysql
+  php:
+    build:
+      context: ./
+    volumes:
+      - ./:/var/www/html:delegated
+  mysql:
+    platform: linux/x86_64
+    image: mysql:8
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=db
+      - MYSQL_USER=db
+      - MYSQL_PASSWORD=db
+    volumes:
+      - ./data/db:/var/lib/mysql
+      - ./user.sql:/docker-entrypoint-initdb.d/user.sql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    ports:
+      - 81:80

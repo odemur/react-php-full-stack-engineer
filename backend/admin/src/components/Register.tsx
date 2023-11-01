@@ -1,6 +1,6 @@
 import React, { useState, FormEvent, ChangeEvent } from "react";
 
-const UserLogin: React.FC = () => {
+const Register: React.FC = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -89,52 +89,62 @@ const UserLogin: React.FC = () => {
     return emailRegex.test(email);
   };
 
-  const NAME_ERROR_MESSAGE = "Informe seu nome.";
-  const EMAIL_REQUIRED_ERROR_MESSAGE = "Informe seu e-mail.";
+  const NAME_ERROR_MESSAGE = "Nome deve ser prenchido...";
+  const EMAIL_REQUIRED_ERROR_MESSAGE = "E-mail não pode ser vazio...";
   const EMAIL_INVALID_ERROR_MESSAGE = "E-mail inválido...";
-  const PASSWORD_REQUIRED_ERROR_MESSAGE = "Informe a senha.";
+  const PASSWORD_REQUIRED_ERROR_MESSAGE = "Você deve informar uma senha.";
 
   return (
     <div>
-      <h2>Adicionar Usuário</h2>
+      <h3>Adicionar Usuário</h3>
       <form onSubmit={handleSubmit} noValidate>
-        <div>
-          <label>Nome:</label>
+        <div className="form-floating mb-4">
           <input
             type="text"
             id="name"
+            className="form-control"
+            placeholder="Informe seu nome"
             value={name}
             onChange={handleNameChange}
           />
+          <label>Informe seu nome:</label>
           {nameError && <div style={{ color: "red" }}>{nameError}</div>}
         </div>
-        <div>
-          <label>E-mail:</label>
+        <div className="form-floating mb-4">
           <input
             type="email"
             autoComplete="email"
             id="email"
+            className="form-control"
+            placeholder="Informe seu e-mail"
             value={email}
             onChange={handleEmailChange}
           />
+          <label>Informe seu e-mail:</label>
           {emailError && <div style={{ color: "red" }}>{emailError}</div>}
         </div>
-        <div>
-          <label>Senha:</label>
+        <div className="form-floating mb-4">
           <input
             type="password"
             autoComplete="new-password"
             id="password"
+            className="form-control"
+            placeholder="Informe uma senha"
             value={password}
             onChange={handlePasswordChange}
           />
+          <label>Informe uma senha:</label>
           {passwordError && <div style={{ color: "red" }}>{passwordError}</div>}
         </div>
-        <button type="submit">Adicionar</button>
-        {apiResponse && <div style={{ color: "red" }}>{apiResponse}</div>}
+        <div className="form-floating mb-4">
+          <button type="submit" className="btn btn-primary">
+            Adicionar
+          </button>
+          {apiResponse && <div style={{ color: "red" }}>{apiResponse}</div>}
+        </div>
       </form>
     </div>
   );
 };
 
-export default UserLogin;
+export default Register;

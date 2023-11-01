@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-// Interface para objeto User (Usuário)
+// Interface para os usuários do sistema
 interface User {
   id: number;
   name: string;
   email: string;
   password: string;
   status: number;
+  created: string;
   last_login: string;
 }
 
@@ -65,28 +66,54 @@ function Users() {
 
   return (
     <div>
-      <h2>Users</h2>
-      <input
-        type="text"
-        placeholder="Pesquisar..."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
-      <ul>
-        {filteredUsers
-          .filter(
-            (user) =>
-              user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-              user.email.toLowerCase().includes(searchQuery.toLowerCase())
-          )
-          .map((user) => (
-            <li key={user.id}>
-              {user.name} - {user.email}{" "}
-              <button onClick={() => handleEmailClick(user)}>Enviar</button>
-            </li>
-          ))}
-      </ul>
-      {/* add Bootstrap  */}
+      <h4 className="mt-4">Usuários do Sistema</h4>
+      <hr />
+      <div className="w-25">
+        <input
+          type="text"
+          placeholder="Pesquisar..."
+          className="form-control"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Data de Cadastro</th>
+            <th>Status</th>
+            <th className="text-end">Enviar e-mail?</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredUsers
+            .filter(
+              (user) =>
+                user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                user.email.toLowerCase().includes(searchQuery.toLowerCase())
+            )
+            .map((user) => (
+              <tr key={user.id}>
+                <td>{user.id}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.created}</td>
+                <td>{user.status ? "Ativo" : "Inativo"}</td>
+                <td className="text-end">
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => handleEmailClick(user)}
+                  >
+                    Enviar!
+                  </button>
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
     </div>
   );
 }

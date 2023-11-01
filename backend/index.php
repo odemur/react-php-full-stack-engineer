@@ -11,7 +11,7 @@ use Slim\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-// Conecão com banco de dados MySQL 
+// Conexão com banco de dados MySQL 
 $pdo = new PDO("mysql:host=mysql;dbname=db", "db", "db");
 
 $app = AppFactory::create();
@@ -24,7 +24,7 @@ $app->post('/api/subscriber', function (Request $request, Response $response) us
 
     if ($formData === null) {
         $response->getBody()->write('Invalid JSON data.');
-        return $response->withStatus(400); // HTTP 400 Bad Request
+        return $response->withStatus(400);
     }
 
     $name = $formData['name'] ?? '';
@@ -53,9 +53,9 @@ $app->post('/api/subscriber', function (Request $request, Response $response) us
 
     if ($stmt->execute()) {
 
-        // >>> falta enviar email com ID >>> 
+        // Todo: Fazer envio de email para o usuário cadastrado
 
-        $response = $response->withStatus(201); // HTTP 201 Created
+        $response = $response->withStatus(201);
         $response->getBody()->write($pdo->lastInsertId());
         return $response;
     } else {
@@ -88,7 +88,7 @@ $app->post('/api/create', function (Request $request, Response $response) use ($
 
     if ($formData === null) {
         $response->getBody()->write('Invalid JSON data.');
-        return $response->withStatus(400); // HTTP 400 Bad Request
+        return $response->withStatus(400);
     }
 
     $name = $formData['name'] ?? '';
@@ -103,7 +103,7 @@ $app->post('/api/create', function (Request $request, Response $response) use ($
 
     if ($count > 0) {
         $response->getBody()->write('Email already registered.');
-        return $response->withStatus(409); // HTTP 409 Conflict
+        return $response->withStatus(409);
     }
 
     $sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
@@ -114,9 +114,9 @@ $app->post('/api/create', function (Request $request, Response $response) use ($
 
     if ($stmt->execute()) {
 
-        // falta enviar email de usuario e senha para o email cadastrado
+        // Todo: Fazer envio de email para o usuário cadastrado
 
-        $response = $response->withStatus(201); // HTTP 201 Created
+        $response = $response->withStatus(201);
         $response->getBody()->write('User data saved in the database.');
         return $response;
     } else {
@@ -132,7 +132,7 @@ $app->post('/api/login', function (Request $request, Response $response) use ($p
 
     if ($formData === null) {
         $response->getBody()->write('Invalid JSON data.');
-        return $response->withStatus(400); // HTTP 400 Bad Request
+        return $response->withStatus(400);
     }
 
     $email = $formData['email'] ?? '';
@@ -149,16 +149,16 @@ $app->post('/api/login', function (Request $request, Response $response) use ($p
         $hash = $row['password'];
 
         if (password_verify($password, $hash)) {
-            $response = $response->withStatus(200); // HTTP 200 OK
+            $response = $response->withStatus(200);
             $response->getBody()->write('Login successful.');
             return $response;
         } else {
             $response->getBody()->write('Invalid email or password.');
-            return $response->withStatus(401); // HTTP 401 Unauthorized
+            return $response->withStatus(401);
         }
     } else {
         $response->getBody()->write('Invalid email or password.');
-        return $response->withStatus(401); // HTTP 401 Unauthorized
+        return $response->withStatus(401);
     }
 });
 
@@ -170,6 +170,10 @@ $app->get('/api/users', function (Request $request, Response $response) use ($pd
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     if (!empty($users)) {
+
+        foreach ($users as &$user) {
+            $user['created'] = (new DateTime($user['created']))->format('d/m/Y H:i:s');
+        }
 
         $response = $response->withHeader('Content-Type', 'application/json');
         $response->getBody()->write(json_encode($users));

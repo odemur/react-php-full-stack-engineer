@@ -7,6 +7,7 @@ document
     const nome = document.getElementById("nome").value;
     const email = document.getElementById("email").value;
 
+    // Limpar mensagens de erro
     document.getElementById("nomeError").textContent = "";
     document.getElementById("emailError").textContent = "";
 
@@ -48,10 +49,15 @@ document
       .then((response) => {
         if (response.ok) {
           // 200 OK
-          alert("Cadastro realizado com sucesso!");
+          document.getElementById("sendError").textContent =
+            "Cadastro realizado com sucesso!";
+          document.getElementById("nome").value = "";
+          document.getElementById("email").value = "";
+          document.getElementById("submit").disabled = true;
         } else {
           // Erro no servidor ou outro
-          alert("Ocorreu um erro, tente novamente...");
+          document.getElementById("emailError").textContent =
+            "Ocorreu um erro, tente novamente...";
         }
       })
       .catch((error) => {

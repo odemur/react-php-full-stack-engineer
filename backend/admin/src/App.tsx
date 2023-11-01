@@ -1,28 +1,26 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import UserForm from "./UserLogin";
-import Login from "./Login";
+import Header from "./components/Header";
+import Navbar from "./components/Navbar";
+import Login from "./components/Login";
+import UserForm from "./components/Register";
+import { AuthProvider } from "./components/AuthContext";
+
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    <AuthProvider>
+    <div className="App container">
+      <Header />
       <BrowserRouter>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/cadastro" element={<UserForm />} />
+          <Route path="/register" element={<UserForm />} />
         </Routes>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Login</Link>
-            </li>
-            <li>
-              <Link to="/cadastro">Cadastro</Link>
-            </li>
-          </ul>
-        </nav>
       </BrowserRouter>
     </div>
+    </AuthProvider>
   );
 };
 

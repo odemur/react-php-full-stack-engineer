@@ -1,10 +1,11 @@
-import React, { useState, useEffect, FormEvent } from "react";
-import Users from "./Users";
+import React, { useState, FormEvent, useContext } from "react";
+import { AuthContext } from "./AuthContext";
+import Tabs from "./Tabs";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [error, setError] = useState<string>("");
 
   // Login, enviando email e senha para o back-end
@@ -36,33 +37,41 @@ const Login: React.FC = () => {
     <div>
       {!isLoggedIn ? (
         <div>
-          <h2>Login</h2>
+          <h3>Login</h3>
           <form onSubmit={handleLogin} noValidate>
-            <div>
-              <label>E-mail:</label>
+            <div className="form-floating mb-4">
               <input
                 type="text"
+                className="form-control"
                 autoComplete="email"
+                placeholder="Informe seu e-mail"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              <label htmlFor="floatingInput">Informe seu e-mail:</label>
             </div>
-            <div>
-              <label>Password:</label>
+            <div className="form-floating">
               <input
                 type="password"
+                className="form-control"
                 autoComplete="current-password"
+                placeholder="Informe uma senha"
                 id="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <label htmlFor="floatingInput">Informe uma senha:</label>
             </div>
-            <button type="submit">Login</button>
-            {error && <div style={{ color: "red" }}>{error}</div>}
+            <div className="mt-4">
+              <button type="submit" className="btn btn-primary">
+                Login
+              </button>
+              {error && <div style={{ color: "red" }}>{error}</div>}
+            </div>
           </form>
         </div>
       ) : (
-        <Users />
+        <Tabs />
       )}
     </div>
   );

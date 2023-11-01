@@ -3,20 +3,112 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Newsletter</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Newsletter LQDI</title>
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
   </head>
   <body>
-    <h1>Receba os nossos artigos de interesse na sua caixa de entrada</h1>
-    <form id="newsletter" novalidate>
-      <input type="text" id="nome" name="nome" required />
-      <p id="nomeError" style="color: red"></p>
+    <nav>Agende uma reunião conosco Começar</nav>
+    <header>
+      <h1 id="title">
+        <img src="./assets/images/logo-lqdi-positivo.png" alt="LQDI Logo" />
+      </h1>
+    </header>
 
-      <input type="email" id="email" name="email" required />
-      <p id="emailError" style="color: red"></p>
+    <main>
+      <section id="featured" class="clearfix">
+        <div>
+          <h2>
+            Construímos estratégias, design e tecnologia de ponta para o seu
+            negócio
+          </h2>
+          <p>Converse com nossa equipe sobre o seu projeto.</p>
+          <a href="#">Começar</a>
+          <!--
+          <img src="./assets/images/featured.png" alt="Featured Image LQDI" />
+          -->
+        </div>
+      </section>
 
-      <input type="submit" value="Submit" />
-    </form>
+      <section id="content" class="clearfix">
+        <div class="article">
+          <img src="./assets/images/keyboard.png" alt="Keyboard" />
+          <h2>Por que é importante um site de qualidade?</h2>
+          <p>
+            Um site de qualidade passou a ser um dos meios de exposição de marca
+            mais eficientes no ambiente online. Ele funciona como uma espécie de
+            cartão...
+          </p>
+          <a href="">Ir para o artigo</a>
+        </div>
+
+        <div class="article">
+          <img src="./assets/images/ipad.png" alt="Ipad" />
+          <h2>
+            6 dicas para trabalhar com marketing digital com verba limitada
+          </h2>
+          <p>
+            Um site de qualidade passou a ser um dos meios de exposição de marca
+            mais eficientes no ambiente online. Ele funciona como uma espécie de
+            cartão...
+          </p>
+          <a href="">Ir para o artigo</a>
+        </div>
+
+        <div class="news">
+          <h3>Receba os nossos artigo de interesse na sua caixa de entrada.</h3>
+          <form id="newsletter" novalidate>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              placeholder="Informe seu nome..."
+              required
+            />
+            <p id="nomeError" style="color: red"></p>
+
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Escreva aqui seu e-mail..."
+              required
+            />
+            <p id="emailError" style="color: red"></p>
+
+            <input type="submit" id="submit" value="Enviar" />
+            <p id="sendError" style="color: #fff"></p>
+          </form>
+        </div>
+      </section>
+
+      <section id="contact" class="clearfix">
+        <div>
+          <h3>
+            Viva uma nova experiência de comunicação integrada com foco nos
+            resultados.
+          </h3>
+          <p>Escreva-nos sobre o seu projeto</p>
+        </div>
+
+        <div></div>
+      </section>
+    </main>
+
+    <footer>
+      <div><img src="./assets/images/logo-lqdi.png" alt="LQDI Logo" /></div>
+      <div>
+        <p>
+          Brasil Rua da Consolação, 4393º andar, Consolação São Paulo +55 11
+          3280-0283
+        </p>
+      </div>
+      <div>
+        <p>Portugal Av. República Nº6 - 1º Andar Lisboa +351 916 029 443</p>
+        <p>
+          Holanda Jasykoffstraat 631506AT ZaandamThe Netherlands +31 622 333 744
+        </p>
+      </div>
+    </footer>
   </body>
-  <script src="script.js"></script>
+  <script src="./assets/js/script.js"></script>
 </html>

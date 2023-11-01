@@ -12,7 +12,7 @@ Finished: 10/29/2023 22:00
 docker-compose build <br />
 docker-compose up <br />
 
-cd /backend/admin <br />
+cd backend/admin <br />
 npm start 
 
 #### Frontend 
